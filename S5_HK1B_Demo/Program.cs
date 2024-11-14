@@ -51,7 +51,7 @@ namespace S5_HK1B_Demo
             }
 
             Random random = new Random();
-            int correctNumber = random.Next(1, 101);
+            int correctNumber = random.Next(10, 100);
 
             while (chances > 0)
             {
@@ -59,18 +59,16 @@ namespace S5_HK1B_Demo
                 Console.Write("Enter your guess: ");
                 int guessNumber = int.Parse(Console.ReadLine());
 
+                string messsage = SuggessMessage(guessNumber.ToString(), correctNumber.ToString());
+
                 if (guessNumber == correctNumber)
                 {
                     Console.WriteLine("Congratulations! You have guessed the correct number.");
                     break;
                 }
-                else if (guessNumber < correctNumber)
-                {
-                    Console.WriteLine("The correct number is greater than your guess.");
-                }
                 else
                 {
-                    Console.WriteLine("The correct number is less than your guess.");
+                    Console.WriteLine("Suggess Message: "+messsage);
                 }
 
                 chances--;
@@ -79,6 +77,27 @@ namespace S5_HK1B_Demo
 
 
             Console.ReadLine();
+        }
+
+        private static string SuggessMessage(string v1, string v2)
+        {
+            string messsage = "";
+            for (int i = 0; i < v1.Length; i++)
+            {
+                if (v1[i] == v2[i])
+                {
+                    messsage += "+";
+                }
+                else if (v2.Contains(v1[i]))
+                {
+                    messsage += "?";
+                }
+                else
+                {
+                    messsage += "_";
+                }
+            }
+            return messsage;
         }
     }
 }
